@@ -1,0 +1,6 @@
+[submodule "cloak-tee/CCF"]
+	path = cloak-tee/CCF
+	url = https://github.com/OxHainan/CCF.git
+[submodule "cloak-tee/eEVM"]
+	path = cloak-tee/eEVM
+	url = https://github.com/OxHainan/eEVM.git

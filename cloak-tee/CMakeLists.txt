@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.16)
+
+set(CCF_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CCF)
+set(EVM_DIR ${CMAKE_CURRENT_SOURCE_DIR}/eEVM)
+include(${CCF_DIR}/cmake/preproject.cmake)
+project(cloak-tee LANGUAGES C CXX)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/common.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ccf.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/eevm.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cloak.app.cmake)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/agent/sandbox.sh ${CMAKE_CURRENT_BINARY_DIR}/sandbox.sh COPYONLY)
+
+option(BUILD_TESTS "Build tests" OFF)
+if (BUILD_TESTS)
+    enable_testing()
+    add_compile_definitions(DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cloak.tests.cmake)
+endif()
+
+option(CLANG_FORMAT "Enable clang format" OFF)
+if(CLANG_FORMAT)
+  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake)
+endif()
